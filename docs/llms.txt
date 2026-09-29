@@ -1,0 +1,11 @@
+# Hired Burglars · ขโมยรับจ้าง
+
+Security work explained with toys, in English and Thai.
+
+- The break-in: pen test (checklist, guards told) vs red team (any way in, guards not told); front door, unpatched window, phishing call, supplier van. AI red-teaming of chatbots.
+- Licences on the wall: CREST, ISO/IEC 27001 (three-year certificate, yearly check-ups), ISC2 and the CISSP.
+- White-label: one outfit does the work, another's name goes on it; markup slider (prices pretend).
+- Industry awards: categories, entry, judges; the entries slider shows the odds.
+- Startup accelerators: ARC in Phnom Penh, three months, up to $5,000 for 5%; money and slice give the implied valuation.
+
+Text CC BY 4.0, code MIT.
