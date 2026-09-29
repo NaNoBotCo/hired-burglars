@@ -1,0 +1,275 @@
+<title>Hired Burglars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rye&family=Atkinson+Hyperlegible:wght@400;700&family=Mitr:wght@500&family=Sarabun:wght@400;600&display=swap">
+<style>
+:root{
+  --ground:#f1efe8; --panel:#fffdf8; --well:#e8e4d8; --ink:#1d1f24; --muted:#5b5f68; --rule:#d6d0c0;
+  --red:#b23a2e; --blue:#27509a; --gold:#d4a017; --goldtext:#7f5f00; --green:#2f7a4a; --wood:#8a5a32; --night:#23304a;
+  --display:"Rye","Mitr",Georgia,serif; --thai-display:"Mitr","Sarabun",Tahoma,sans-serif;
+  --body:"Atkinson Hyperlegible","Sarabun",Tahoma,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#121419; --panel:#1b1e25; --well:#242832; --ink:#eceae4; --muted:#a3a7b0; --rule:#323744;
+  --red:#e2685c; --blue:#7da2e6; --gold:#f0c23c; --goldtext:#f0c23c; --green:#62c38a; --wood:#b07a4c; --night:#0b1020; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --ground:#121419; --panel:#1b1e25; --well:#242832; --ink:#eceae4; --muted:#a3a7b0; --rule:#323744;
+  --red:#e2685c; --blue:#7da2e6; --gold:#f0c23c; --goldtext:#f0c23c; --green:#62c38a; --wood:#b07a4c; --night:#0b1020; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{background:var(--ground);color:var(--ink)}
+body{margin:0;font:21px/1.65 var(--body);padding-inline:16px;padding-block:0 72px}
+.wrap{max-width:720px;margin:0 auto}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+[data-lang="en"] .th{display:none!important}
+[data-lang="th"] .en{display:none!important}
+header.bar{display:flex;align-items:center;gap:12px;max-width:720px;margin:0 auto;padding-block:14px}
+.brand{font:22px var(--display);margin-right:auto;white-space:nowrap}
+.lang{display:flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden}
+.lang button{font:700 18px var(--body);background:none;border:0;color:var(--ink);padding:6px 16px;cursor:pointer;min-height:44px}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+h1,h2{margin:0;line-height:1.12;text-wrap:balance;font-weight:400;font-family:var(--display)}
+[data-lang="th"] h1,[data-lang="th"] h2,[data-lang="th"] .brand{font-family:var(--thai-display);font-weight:500}
+h1{font-size:clamp(40px,9vw,64px);margin-top:10px}
+h2{font-size:clamp(28px,6vw,38px)}
+.lede{font-size:23px}
+section{margin:44px 0}
+section>p{margin:.6em 0}
+.toy{background:var(--panel);border:2px solid var(--ink);border-radius:14px;padding:16px;margin:18px 0 8px;box-shadow:5px 5px 0 var(--rule)}
+.toy svg{display:block;width:100%;height:auto}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+button.go{font:700 18px var(--body);color:var(--ink);background:var(--panel);border:2px solid var(--ink);border-radius:10px;padding:8px 16px;cursor:pointer;min-height:48px}
+button.go[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+.say{font-size:21px;font-weight:700;margin-top:10px;min-height:1.65em}
+.say b{color:var(--goldtext)}
+.bad{color:var(--red)} .good{color:var(--green)}
+.lever{display:flex;align-items:center;gap:14px;margin:10px 0;flex-wrap:wrap;font-weight:700;font-size:19px}
+.switch{position:relative;width:118px;height:52px;border-radius:999px;border:3px solid var(--ink);background:var(--well);cursor:pointer;padding:0}
+.switch .knob{position:absolute;top:4px;left:4px;width:38px;height:38px;border-radius:50%;background:var(--blue);border:3px solid var(--ink);transition:left .3s}
+.switch[aria-checked="true"] .knob{left:68px;background:var(--red)}
+.range{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;margin:10px 0}
+.range label{font-weight:700;font-size:19px}
+.range input{width:100%;accent-color:var(--gold);height:32px}
+.range output{font:700 24px var(--body);text-align:right;grid-row:1/3;grid-column:2;font-variant-numeric:tabular-nums}
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.badge{border:3px solid var(--ink);border-radius:12px;background:var(--well);padding:14px;text-align:left;cursor:pointer;font:inherit;color:inherit;min-height:150px}
+.badge b{display:block;font:26px var(--display)}
+[data-lang="th"] .badge b{font-family:var(--thai-display)}
+.badge .back{display:none;font-size:18px;line-height:1.5}
+.badge[aria-pressed="true"]{background:var(--panel)}
+.badge[aria-pressed="true"] .front{display:none}
+.badge[aria-pressed="true"] .back{display:block}
+.big{font:clamp(34px,8vw,52px) var(--display);color:var(--goldtext);font-variant-numeric:tabular-nums}
+ol.src{font-size:16px;line-height:1.55;padding-left:1.3em} ol.src li{margin:.45em 0}
+footer{max-width:720px;margin:40px auto 0;font-size:16px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.switch .knob{transition:none}}
+@media (max-width:520px){.brand{font-size:18px}.lang button{padding:6px 12px;font-size:17px}body{font-size:20px}.toy{padding:12px}}
+</style>
+
+<div data-root>
+<header class="bar">
+  <span class="brand"><span class="en">Hired Burglars</span><span class="th">ขโมยรับจ้าง</span></span>
+  <div class="lang" role="group" aria-label="Language / ภาษา">
+    <button type="button" data-l="en" aria-pressed="true">English</button>
+    <button type="button" data-l="th" aria-pressed="false">ไทย</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1><span class="en">Hired Burglars</span><span class="th">ขโมยรับจ้าง</span></h1>
+  <p class="lede en">Some folks get paid to break into your house, with your say-so, so the real crooks can't. Here's that whole line of work in plain words: the break-in, the licences on the wall, the name on the truck, the county-fair ribbons, and the money that starts new outfits.</p>
+  <p class="lede th">มีคนที่ได้ค่าจ้างให้งัดบ้านคุณ โดยคุณอนุญาต เพื่อให้ขโมยจริงเข้าไม่ได้ นี่คืองานสายนี้ทั้งหมดแบบภาษาง่าย ๆ: การงัดบ้าน ใบอนุญาตบนผนัง ชื่อบนรถ ริบบิ้นงานวัด และเงินที่ช่วยให้บริษัทใหม่เริ่มต้น</p>
+
+  <!-- 1 break-in -->
+  <section>
+    <h2><span class="en">The break-in</span><span class="th">การงัดบ้าน</span></h2>
+    <p class="en">There's two kinds of hired break-in. A <b>pen test</b> (penetration test) walks a checklist: every door, every window, and you get a list of what's loose. The guards know they're comin'. A <b>red team</b> plays the crook for real: any way in, guards not told, and the job's done when they're holdin' the silver. Flip the lever, then pick a way in.</p>
+    <p class="th">การงัดบ้านรับจ้างมีสองแบบ <b>เพนเทสต์</b> (penetration test) เดินตามรายการ: ทุกประตู ทุกหน้าต่าง แล้วได้รายการว่าอะไรหลวม ยามรู้ล่วงหน้าว่าจะมา <b>เรดทีม</b> เล่นเป็นโจรจริง ๆ: เข้าทางไหนก็ได้ ไม่บอกยาม งานจบเมื่อถือช้อนเงินออกมาได้ โยกคัน แล้วเลือกทางเข้า</p>
+    <div class="toy">
+      <svg id="house" viewBox="0 0 680 300" role="img" aria-label="A house with four ways in"></svg>
+      <div class="lever"><span class="en">Pen test</span><span class="th">เพนเทสต์</span>
+        <button type="button" class="switch" id="mode" role="switch" aria-checked="false" aria-label="Pen test or red team"><span class="knob"></span></button>
+        <span class="en">Red team</span><span class="th">เรดทีม</span></div>
+      <div class="row" id="ways"></div>
+      <p class="say" id="houseSay" aria-live="polite"></p>
+    </div>
+    <p class="en">The newest job is red-teamin' chatbots: tryin' every trick to talk an AI into sayin' what it oughtn't. Askin' in a language the builders didn't test much, like Thai, is one of the tricks.</p>
+    <p class="th">งานใหม่ล่าสุดคือเรดทีมแชตบอต: ลองทุกกลเม็ดให้ AI พูดสิ่งที่ไม่ควรพูด ถามเป็นภาษาที่คนสร้างไม่ค่อยได้ทดสอบ อย่างภาษาไทย ก็เป็นกลหนึ่ง</p>
+  </section>
+
+  <!-- 2 badges -->
+  <section>
+    <h2><span class="en">Licences on the wall</span><span class="th">ใบอนุญาตบนผนัง</span></h2>
+    <p class="en">A burglar you invite in had better have papers. Tap a badge to turn it over.</p>
+    <p class="th">ขโมยที่เชิญเข้าบ้านควรมีใบรับรอง แตะป้ายเพื่อพลิกดู</p>
+    <div class="toy"><div class="badges" id="badges"></div></div>
+  </section>
+
+  <!-- 3 truck -->
+  <section>
+    <h2><span class="en">Somebody else's name on the truck</span><span class="th">ชื่อคนอื่นบนรถ</span></h2>
+    <p class="en"><b>White-label</b> means one outfit does the work and another outfit's name goes on it. Your local computer shop sells you a break-in test; the hired burglars show up in the shop's colors. The shop buys at a wholesale price and marks it up. Flip the paint, pull the markup. (The prices are pretend.)</p>
+    <p class="th"><b>ไวต์เลเบล</b> คือบริษัทหนึ่งทำงาน แต่ติดชื่ออีกบริษัท ร้านคอมใกล้บ้านขายงานทดสอบให้คุณ ขโมยรับจ้างมาในชุดของร้าน ร้านซื้อราคาส่งแล้วบวกกำไร พลิกสีรถ แล้วลองดึงคันกำไร (ราคาสมมติ)</p>
+    <div class="toy">
+      <svg id="truck" viewBox="0 0 680 220" role="img" aria-label="A van with a company name painted on it"></svg>
+      <div class="lever"><span class="en">Burglars' name</span><span class="th">ชื่อขโมย</span>
+        <button type="button" class="switch" id="paint" role="switch" aria-checked="true" aria-label="Whose name on the truck"><span class="knob"></span></button>
+        <span class="en">Shop's name</span><span class="th">ชื่อร้าน</span></div>
+      <div class="range"><label for="markup"><span class="en">Shop's markup</span><span class="th">ร้านบวกกำไร</span></label><input type="range" id="markup" min="0" max="100" step="5" value="30"><output id="markupOut">30%</output></div>
+      <p class="say" id="truckSay" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- 4 ribbons -->
+  <section>
+    <h2><span class="en">County-fair ribbons</span><span class="th">ริบบิ้นงานวัด</span></h2>
+    <p class="en">Security has its own fairs. Outfits enter a category (best new company, best red team, best of the year), pay an entry, a panel of judges scores 'em, and winners get a trophy at a big dinner and a badge for their website. The chairman runs the judging. A ribbon tells you the judges liked the entry; it don't tell you who else entered.</p>
+    <p class="th">วงการความปลอดภัยก็มีงานประกวดของตัวเอง บริษัทสมัครในหมวด (บริษัทใหม่ยอดเยี่ยม เรดทีมยอดเยี่ยม ยอดเยี่ยมแห่งปี) จ่ายค่าสมัคร กรรมการให้คะแนน ผู้ชนะได้ถ้วยในงานเลี้ยงใหญ่และป้ายไว้ติดเว็บไซต์ ประธานดูแลการตัดสิน ริบบิ้นบอกว่ากรรมการชอบผลงาน แต่ไม่ได้บอกว่ามีใครส่งประกวดบ้าง</p>
+    <div class="toy">
+      <div class="range"><label for="entries"><span class="en">Entries in the category</span><span class="th">ผู้สมัครในหมวด</span></label><input type="range" id="entries" min="1" max="40" value="6"><output id="entriesOut">6</output></div>
+      <p class="say" id="ribbonSay" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- 5 accelerator -->
+  <section>
+    <h2><span class="en">Seed money for a slice</span><span class="th">เงินตั้งต้นแลกหุ้น</span></h2>
+    <p class="en">A <b>startup accelerator</b> is a short school for brand-new companies. They get coachin', a little money, and introductions; the accelerator gets a slice of the company (<b>equity</b>). One in Phnom Penh, ARC, runs three months and puts in up to $5,000 for 5%. Pull the levers to see what the deal says the whole company is worth.</p>
+    <p class="th"><b>สตาร์ทอัพแอคเซเลอเรเตอร์</b> คือโรงเรียนระยะสั้นสำหรับบริษัทเกิดใหม่ ได้โค้ช เงินนิดหน่อย และการแนะนำคน แลกกับหุ้นส่วนหนึ่งของบริษัท (<b>equity</b>) ที่พนมเปญมีโครงการชื่อ ARC สามเดือน ลงเงินได้ถึง 5,000 ดอลลาร์ แลก 5% ลองโยกคันดูว่าดีลนี้ตีราคาทั้งบริษัทเท่าไร</p>
+    <div class="toy">
+      <div class="range"><label for="cash"><span class="en">Money in</span><span class="th">เงินลงทุน</span></label><input type="range" id="cash" min="1000" max="50000" step="1000" value="5000"><output id="cashOut">$5,000</output></div>
+      <div class="range"><label for="slice"><span class="en">Slice they take</span><span class="th">หุ้นที่ได้ไป</span></label><input type="range" id="slice" min="1" max="20" value="5"><output id="sliceOut">5%</output></div>
+      <p><span class="en">Whole company, by this deal:</span><span class="th">ทั้งบริษัท ตามดีลนี้:</span></p>
+      <div class="big" id="worth">$100,000</div>
+      <p class="say" id="seedSay" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="en">Sources</span><span class="th">แหล่งที่มา</span></h2>
+    <ol class="src">
+      <li>CREST. <a href="https://www.crest-approved.org/">crest-approved.org</a></li>
+      <li>ISO/IEC 27001. <a href="https://www.iso.org/standard/27001">iso.org/standard/27001</a></li>
+      <li>ISC2 and CISSP. <a href="https://www.isc2.org/">isc2.org</a></li>
+      <li>ARC Start-up Accelerator, AUPP Technology Center. <a href="https://www.aupptechcenter.com/arc-mentors/">aupptechcenter.com</a> · <a href="https://thebettercambodia.com/launching-arc-start-up-accelerator-a-new-era-for-cambodian-entrepreneurs/">thebettercambodia.com</a></li>
+      <li>Cyber Security Awards. <a href="https://cybersecurity-awards.com/">cybersecurity-awards.com</a></li>
+    </ol>
+  </section>
+</main>
+<footer><a href="https://nanobotco.github.io/chains-drawn/">Chains, Drawn</a> · <a href="https://nanobotco.github.io/all-factored/">All Factored</a> · CC BY 4.0 / MIT</footer>
+</div>
+
+<script>
+(() => {
+const root = document.querySelector('[data-root]');
+let L = 'en';
+try { const s = localStorage.getItem('burglar-lang'); if (s === 'th' || s === 'en') L = s; } catch (e) {}
+const T = (en, th) => L === 'th' ? th : en;
+const $ = id => document.getElementById(id);
+const renders = [];
+const txt = (x, y, s, size = 20, a = 'middle', fill = 'var(--ink)') => `<text x="${x}" y="${y}" text-anchor="${a}" font-size="${size}" font-weight="700" fill="${fill}" font-family="Atkinson Hyperlegible, Sarabun, sans-serif">${s}</text>`;
+const money = n => '$' + Math.round(n).toLocaleString('en-US');
+
+/* ---------- house ---------- */
+let red = false, pick = null;
+const WAYS = [
+  {id:'door', x:250, y:210, en:'Front door', th:'ประตูหน้า',
+    pen:['Checked the lock. Good lock. Wrote it down.', 'ตรวจกุญแจแล้ว กุญแจดี จดไว้'],
+    red:['Good lock. They didn\'t bother with it.', 'กุญแจดี เขาเลยไม่เสียเวลากับมัน']},
+  {id:'window', x:420, y:150, en:'Back window', th:'หน้าต่างหลังบ้าน',
+    pen:['Latch is broke (old software nobody updated). On the list, marked urgent.', 'กลอนเสีย (ซอฟต์แวร์เก่าไม่มีใครอัปเดต) ใส่รายการ ด่วน'],
+    red:['Latch is broke. In through the window and up to the silver drawer.', 'กลอนเสีย ปีนเข้าหน้าต่าง ตรงไปลิ้นชักช้อนเงิน']},
+  {id:'phone', x:120, y:120, en:'Call the housekeeper', th:'โทรหาแม่บ้าน',
+    pen:['Not on the checklist. Phone tricks weren\'t part of the job.', 'ไม่อยู่ในรายการ กลเม็ดทางโทรศัพท์ไม่รวมในงาน'],
+    red:['"Hi, it\'s the landlord, what\'s the gate code?" She told \'em. That\'s phishing: foolin\' a person instead of a lock.', '"สวัสดีครับ เจ้าของบ้านนะ รหัสประตูอะไรนะ?" เธอบอกไป นี่คือฟิชชิง: หลอกคนแทนที่จะงัดกุญแจ']},
+  {id:'van', x:580, y:220, en:'Delivery van', th:'รถส่งของ',
+    pen:['Out of scope. The delivery company ain\'t yours to test.', 'นอกขอบเขต บริษัทส่งของไม่ใช่ของคุณ ทดสอบไม่ได้'],
+    red:['Rode in with the groceries. The guards waved the van through like always.', 'นั่งมากับของชำ ยามโบกรถผ่านเหมือนทุกวัน']},
+];
+function renderHouse() {
+  let s = `<rect width="680" height="300" fill="var(--night)" opacity="${red ? .9 : .15}"/>`;
+  s += `<path d="M180 130 L340 40 L500 130 Z" fill="var(--wood)" stroke="var(--ink)" stroke-width="3"/><rect x="190" y="130" width="300" height="140" fill="var(--panel)" stroke="var(--ink)" stroke-width="3"/>`;
+  s += `<rect x="230" y="190" width="42" height="80" fill="var(--wood)" stroke="var(--ink)" stroke-width="3"/><rect x="400" y="150" width="54" height="44" fill="var(--gold)" stroke="var(--ink)" stroke-width="3"/><path d="M427 150v44M400 172h54" stroke="var(--ink)" stroke-width="2"/>`;
+  s += `<rect x="310" y="215" width="50" height="30" rx="4" fill="#c9ccd4" stroke="var(--ink)" stroke-width="2"/>` + txt(335, 262, T('silver', 'ช้อนเงิน'), 15);
+  s += `<path d="M70 150 q0 -30 30 -30 h20" stroke="var(--ink)" stroke-width="3" fill="none"/><rect x="60" y="150" width="22" height="36" rx="5" fill="var(--blue)" stroke="var(--ink)" stroke-width="2"/>`;
+  s += `<rect x="540" y="200" width="100" height="50" rx="8" fill="var(--blue)" stroke="var(--ink)" stroke-width="3"/><circle cx="560" cy="252" r="10" fill="var(--ink)"/><circle cx="620" cy="252" r="10" fill="var(--ink)"/>`;
+  s += `<g>${[0,1,2].map(k => `<circle cx="${40 + k * 30}" cy="270" r="10" fill="${red ? 'var(--muted)' : 'var(--green)'}" stroke="var(--ink)" stroke-width="2"/>`).join('')}</g>` + txt(70, 296, red ? T('guards: not told', 'ยาม: ไม่รู้') : T('guards: told', 'ยาม: รู้'), 15, 'middle', red ? 'var(--panel)' : 'var(--ink)');
+  if (pick) { const w = WAYS.find(x => x.id === pick); s += `<circle cx="${w.x}" cy="${w.y}" r="34" fill="none" stroke="var(--red)" stroke-width="5"/>`; }
+  $('house').innerHTML = s;
+  $('ways').innerHTML = WAYS.map(w => `<button type="button" class="go" data-w="${w.id}" aria-pressed="${w.id === pick}">${T(w.en, w.th)}</button>`).join('');
+  if (!pick) $('houseSay').textContent = T('Pick a way in.', 'เลือกทางเข้า');
+  else { const w = WAYS.find(x => x.id === pick); $('houseSay').textContent = T(...(red ? w.red : w.pen)); }
+}
+$('mode').addEventListener('click', () => { red = !red; $('mode').setAttribute('aria-checked', red); renderHouse(); });
+$('ways').addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (b) { pick = b.dataset.w; renderHouse(); } });
+renders.push(renderHouse);
+
+/* ---------- badges ---------- */
+const BADGES = [
+  {en:'CREST', th:'CREST', fen:'The break-in licence', fth:'ใบอนุญาตงัดบ้าน',
+    ben:'A UK-born outfit that tests the testers. The company gets checked, and its burglars sit hard exams. Banks and governments often won\'t hire a burglar without it.',
+    bth:'องค์กรจากอังกฤษที่สอบคนทดสอบ บริษัทถูกตรวจ และขโมยรับจ้างต้องสอบยาก ๆ ธนาคารและรัฐบาลมักไม่จ้างถ้าไม่มี'},
+  {en:'ISO 27001', th:'ISO 27001', fen:'The house-rules book', fth:'สมุดกฎบ้าน',
+    ben:'A world standard for how a company keeps its own secrets. An auditor checks the rules and whether folks follow \'em. The certificate lasts three years, with a check-up every year.',
+    bth:'มาตรฐานสากลว่าบริษัทเก็บความลับของตัวเองอย่างไร ผู้ตรวจดูทั้งกฎและดูว่าคนทำตามจริงไหม ใบรับรองอยู่ได้สามปี ตรวจซ้ำทุกปี'},
+  {en:'ISC2', th:'ISC2', fen:'The big club', fth:'สมาคมใหญ่',
+    ben:'A worldwide members\' club for security folks. It runs the CISSP, the best-known security certificate for a person. It has a big board at the top and local chapters run by volunteers.',
+    bth:'สมาคมสมาชิกคนทำงานความปลอดภัยทั่วโลก จัดสอบ CISSP ใบรับรองความปลอดภัยรายบุคคลที่ดังที่สุด มีคณะกรรมการใหญ่ข้างบน และสาขาท้องถิ่นที่อาสาสมัครดูแล'},
+];
+let flipped = new Set();
+function renderBadges() {
+  $('badges').innerHTML = BADGES.map((b, i) => `<button type="button" class="badge" data-b="${i}" aria-pressed="${flipped.has(i)}"><b>${T(b.en, b.th)}</b><span class="front">${T(b.fen, b.fth)}</span><span class="back">${T(b.ben, b.bth)}</span></button>`).join('');
+}
+$('badges').addEventListener('click', e => { const b = e.target.closest('[data-b]'); if (!b) return; const i = +b.dataset.b; flipped.has(i) ? flipped.delete(i) : flipped.add(i); renderBadges(); });
+renders.push(renderBadges);
+
+/* ---------- truck ---------- */
+let shop = true;
+const WHOLESALE = 800;
+function renderTruck() {
+  const m = +$('markup').value; $('markupOut').textContent = m + '%';
+  const name = shop ? T('Bubba\'s Computers', 'ร้านคอมบุบบ้า') : T('Hired Burglars Ltd', 'บริษัทขโมยรับจ้าง');
+  let s = `<rect x="120" y="50" width="330" height="120" rx="10" fill="${shop ? 'var(--gold)' : 'var(--red)'}" stroke="var(--ink)" stroke-width="3"/><path d="M450 90 h70 l40 40 v40 h-110z" fill="${shop ? 'var(--gold)' : 'var(--red)'}" stroke="var(--ink)" stroke-width="3"/><rect x="465" y="100" width="50" height="30" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>`;
+  s += `<circle cx="200" cy="175" r="24" fill="var(--ink)"/><circle cx="500" cy="175" r="24" fill="var(--ink)"/>` + txt(285, 118, name, 28, 'middle', '#1d1f24');
+  s += `<g>${[0,1].map(k => `<circle cx="${590 + k * 34}" cy="120" r="12" fill="var(--muted)" stroke="var(--ink)" stroke-width="2"/><path d="M${578 + k * 34} 158q12 -26 24 0z" fill="var(--muted)" stroke="var(--ink)" stroke-width="2"/>`).join('')}</g>` + txt(607, 190, T('same crew', 'ทีมเดิม'), 15);
+  $('truck').innerHTML = s;
+  const price = WHOLESALE * (1 + m / 100);
+  $('truckSay').innerHTML = shop
+    ? T(`You pay the shop <b>${money(price)}</b> a day. The burglars get ${money(WHOLESALE)}; the shop keeps ${money(price - WHOLESALE)}. Same crew either way.`, `คุณจ่ายร้าน <b>${money(price)}</b> ต่อวัน ขโมยได้ ${money(WHOLESALE)} ร้านเก็บ ${money(price - WHOLESALE)} ทีมเดิมไม่ว่าแบบไหน`)
+    : T(`Hired straight, the burglars charge you their own price. You know who's comin' to your house.`, `จ้างตรง ขโมยคิดราคาของตัวเอง คุณรู้ว่าใครจะมาบ้าน`);
+}
+$('paint').addEventListener('click', () => { shop = !shop; $('paint').setAttribute('aria-checked', shop); renderTruck(); });
+$('markup').addEventListener('input', renderTruck);
+renders.push(renderTruck);
+
+/* ---------- ribbons ---------- */
+function renderRibbon() {
+  const n = +$('entries').value; $('entriesOut').textContent = n;
+  $('ribbonSay').innerHTML = n === 1
+    ? T('One entry. It wins the ribbon by showin\' up.', 'มีผู้สมัครคนเดียว ได้ริบบิ้นเพราะมาสมัคร')
+    : T(`${n} entries, one gold ribbon. Roughly <b>1 in ${n}</b> takes it home. The badge on the website looks the same either way.`, `ผู้สมัคร ${n} ราย ริบบิ้นทองหนึ่งอัน ประมาณ <b>1 ใน ${n}</b> ได้กลับบ้าน ป้ายบนเว็บไซต์ดูเหมือนกันไม่ว่าแบบไหน`);
+}
+$('entries').addEventListener('input', renderRibbon);
+renders.push(renderRibbon);
+
+/* ---------- seed ---------- */
+function renderSeed() {
+  const c = +$('cash').value, p = +$('slice').value;
+  $('cashOut').textContent = money(c); $('sliceOut').textContent = p + '%';
+  const worth = c / (p / 100);
+  $('worth').textContent = money(worth);
+  $('seedSay').innerHTML = T(`${money(c)} buys ${p}%, so the deal prices the whole company at ${money(worth)}. If it sells one day for $1 million, that ${p}% is <b>${money(1e6 * p / 100)}</b>.`,
+    `${money(c)} ได้ ${p}% ดีลนี้จึงตีราคาทั้งบริษัท ${money(worth)} ถ้าวันหนึ่งขายได้ 1 ล้านดอลลาร์ หุ้น ${p}% นั้นเท่ากับ <b>${money(1e6 * p / 100)}</b>`);
+}
+['cash', 'slice'].forEach(id => $(id).addEventListener('input', renderSeed));
+renders.push(renderSeed);
+
+function setLang(l) {
+  L = l; root.dataset.lang = l; document.documentElement.lang = l;
+  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === l));
+  try { localStorage.setItem('burglar-lang', l); } catch (e) {}
+  renders.forEach(f => f());
+}
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.l)));
+setLang(L);
+})();
+</script>
